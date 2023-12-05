@@ -3,8 +3,9 @@ import NewEntryCard from '@/components/NewEntryCard';
 import Question from '@/components/Question';
 import { getUser } from '@/utils/auth';
 import { prisma } from '@/utils/db';
-import Link from 'next/link';
+import { revalidatePath } from 'next/cache';
 
+export const revalidate = 1;
 const getEntries = async () => {
   const user = await getUser();
   const entries = await prisma.journalEntry.findMany({
@@ -18,7 +19,7 @@ const getEntries = async () => {
       analysis: true,
     },
   });
-
+  revalidatePath('/journal');
   return entries;
 };
 
@@ -31,9 +32,9 @@ const JournalPage = async () => {
       <div className="grid grid-cols-3 gap-4 p-10">
         <NewEntryCard />
         {entries.map((entry) => (
-          <Link href={`/journal/${entry.id}`} key={entry.id}>
+          <div key={entry.id}>
             <EntryCard entry={entry} />
-          </Link>
+          </div>
         ))}
       </div>
     </>

@@ -26,7 +26,7 @@ const Editor = ({ entry }) => {
       setIsLoading(false);
     },
   });
-  console.log(analysis?.color);
+
   return (
     <div className="w-full h-full flex">
       <div className="w-10/12">

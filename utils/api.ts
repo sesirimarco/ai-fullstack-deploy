@@ -28,13 +28,13 @@ export const updateEntry = async (id, content) => {
 };
 
 export const askQuestion = async (question) => {
-   const res = await fetch(
+  const res = await fetch(
     new Request(createURL(`/api/question`), {
       method: 'POST',
-      body: JSON.stringify({question})
+      body: JSON.stringify({ question }),
     }),
   );
- /*  const res = await fetch(
+  /*  const res = await fetch(
     new Request(createURL(`/api/question`), {
       method: 'GET',
     }),
@@ -43,4 +43,10 @@ export const askQuestion = async (question) => {
     const data = await res.json();
     return data.data;
   }
+};
+
+export const deleteEntry = async (id: string) => {
+  const response = await fetch(createURL(`/api/journal/${id}`), {
+    method: 'DELETE',
+  });
 };
