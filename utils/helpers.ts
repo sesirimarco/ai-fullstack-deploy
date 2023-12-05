@@ -3,8 +3,8 @@ export const getOppositeColor = (hexColor: string) => {
   const validHexFormat = /^#([0-9A-Fa-f]{6})$/.test(hexColor);
 
   if (!validHexFormat) {
-    console.error('Invalid hexadecimal color format');
-    return null;
+    console.log('Invalid hexadecimal color format');
+    return '#000000';
   }
 
   // Extract color components
