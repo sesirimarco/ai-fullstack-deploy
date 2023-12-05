@@ -1,7 +1,8 @@
 import Editor from '@/components/Editor';
 import { getUserByClerkID } from '@/utils/auth';
 import { prisma } from '@/utils/db';
-
+import { revalidatePath } from 'next/cache';
+export const dynamic = 'auto'
 const getEntry = async (id) => {
   const user = await getUserByClerkID();
   const entry = await prisma.journalEntry.findUnique({
@@ -13,7 +14,7 @@ const getEntry = async (id) => {
       analysis: true,
     },
   });
-
+  revalidatePath('/journal');
   return entry;
 };
 const EntryPage = async ({ params }) => {
